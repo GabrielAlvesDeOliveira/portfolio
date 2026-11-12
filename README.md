@@ -20,7 +20,7 @@ Site pessoal em HTML, CSS e JavaScript puro, feito a partir do protótipo "Portf
 ## Onde mudar cada coisa
 
 - **Textos fixos (PT e EN):** objeto `I18N` no `script.js`
-- **Trajetória:** lista `TIMELINE` no `script.js` (o ano aberto ao carregar é `activePeriod` em `state`, 0 = primeiro ano)
+- **Trajetória:** lista `TIMELINE` no `script.js` (o ano aberto ao carregar é `activePeriod` em `state`, 0 = primeiro ano). Os anos trocam sozinhos a cada 10 s (`AUTOPLAY_MS`); se o visitante clicar em um ano, a troca para e volta depois de 2 min (`RESUME_MS`). A troca também espera enquanto a seção está fora da tela.
 - **Skills:** lista `SKILLS` no `script.js` (nível 1 = básico, 2 = intermediário, 3 = avançado)
 - **Projetos:** vêm sozinhos da API do GitHub (6 mais recentes, sem forks, privados ou arquivados). O mais recente ganha o card vermelho.
   - `EXCLUDE_REPOS`: repositórios que nunca aparecem (o próprio portfólio já está lá)

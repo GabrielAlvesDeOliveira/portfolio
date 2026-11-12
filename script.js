@@ -270,7 +270,8 @@
               "Created and tracked KPIs in Monday",
               "Organized deliveries with Monday and ClickUp"
             ]
-          }
+          },
+          link: { href: "https://unect.com.br/", pt: "Conhecer a Unect Jr ↗", en: "Visit Unect Jr ↗" }
         }
       ]
     }
@@ -554,25 +555,128 @@
     wrap.innerHTML = "";
     period.items.forEach(function (item, i) {
       var card = detailCard(item);
-      card.style.animationDelay = i * 0.08 + "s";
+      card.style.animationDelay = i * 0.1 + "s";
       wrap.appendChild(card);
     });
   }
 
-  function selectPeriod(index, focus) {
-    state.activePeriod = index;
-    renderTimeline();
-    if (focus) {
-      var btn = document.getElementById("year-" + index);
-      if (btn) btn.focus();
+  // Atualiza só as classes da linha do tempo (sem recriar), para as transições do CSS rodarem
+  function updateTimelineState() {
+    document.querySelectorAll("#timeline .period").forEach(function (col) {
+      var active = Number(col.dataset.period) === state.activePeriod;
+      col.classList.toggle("is-active", active);
+      var btn = col.querySelector(".period__year");
+      btn.setAttribute("aria-selected", String(active));
+      btn.tabIndex = active ? 0 : -1;
+      col.querySelectorAll(".chip").forEach(function (chip) {
+        chip.classList.toggle("is-active", active);
+      });
+    });
+  }
+
+  // Troca animada dos cards: os atuais saem, a altura se ajusta e os novos entram
+  var swapTimer = null;
+  function swapDetail(direction) {
+    var wrap = document.getElementById("timeline-detail");
+    var dirClass = direction < 0 ? "is-back" : "is-forward";
+    wrap.classList.remove("is-back", "is-forward");
+    wrap.classList.add(dirClass);
+
+    if (reduceMotion || !wrap.children.length) {
+      renderDetail();
+      return;
     }
+
+    clearTimeout(swapTimer);
+    var startHeight = wrap.offsetHeight;
+    wrap.style.height = startHeight + "px";
+    wrap.classList.add("is-leaving");
+
+    swapTimer = setTimeout(function () {
+      renderDetail();
+      wrap.classList.remove("is-leaving");
+      wrap.style.height = "auto";
+      var endHeight = wrap.offsetHeight;
+      wrap.style.height = startHeight + "px";
+      void wrap.offsetHeight; // força o navegador a aplicar a altura inicial
+      wrap.style.height = endHeight + "px";
+      swapTimer = setTimeout(function () { wrap.style.height = ""; }, 500);
+    }, 260);
+  }
+
+  function selectPeriod(index, opts) {
+    opts = opts || {};
+    if (index === state.activePeriod) return;
+    var n = TIMELINE.length;
+    var forward = (index - state.activePeriod + n) % n <= n / 2;
+    state.activePeriod = index;
+    updateTimelineState();
+    swapDetail(forward ? 1 : -1);
+    if (opts.focus) {
+      var btn = document.getElementById("year-" + index);
+      if (btn) btn.focus({ preventScroll: true });
+    }
+  }
+
+  /* Troca automática de ano a cada 10 s.
+     Se a pessoa escolher um ano, para e só volta depois de 2 min sem cliques.
+     Também espera enquanto a seção não está na tela ou a aba está escondida. */
+  var AUTOPLAY_MS = 10000;
+  var RESUME_MS = 120000;
+  var TICK_MS = 100;
+  var autoplay = {
+    enabled: true,
+    elapsed: 0,
+    visible: false,
+    resumeTimer: null
+  };
+
+  function setAutoplayEnabled(on) {
+    autoplay.enabled = on;
+    autoplay.elapsed = 0;
+    var root = document.getElementById("timeline");
+    root.classList.toggle("is-autoplay", on);
+    root.style.setProperty("--t", 0);
+  }
+
+  function pauseAutoplayByUser() {
+    setAutoplayEnabled(false);
+    clearTimeout(autoplay.resumeTimer);
+    autoplay.resumeTimer = setTimeout(function () { setAutoplayEnabled(true); }, RESUME_MS);
+  }
+
+  function setupAutoplay() {
+    var section = document.getElementById("trajetoria");
+    var root = document.getElementById("timeline");
+
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function (entries) {
+        autoplay.visible = entries[0].isIntersecting;
+      }, { threshold: 0.25 }).observe(root);
+    } else {
+      autoplay.visible = true;
+    }
+
+    setAutoplayEnabled(true);
+    setInterval(function () {
+      if (!autoplay.enabled || !autoplay.visible || document.hidden) return;
+      autoplay.elapsed += TICK_MS;
+      root.style.setProperty("--t", Math.min(autoplay.elapsed / AUTOPLAY_MS, 1).toFixed(3));
+      if (autoplay.elapsed >= AUTOPLAY_MS) {
+        autoplay.elapsed = 0;
+        root.style.setProperty("--t", 0);
+        selectPeriod((state.activePeriod + 1) % TIMELINE.length);
+      }
+    }, TICK_MS);
   }
 
   function setupTimeline() {
     var root = document.getElementById("timeline");
     root.addEventListener("click", function (e) {
       var year = e.target.closest(".period__year");
-      if (year) selectPeriod(Number(year.dataset.period), true);
+      if (!year) return;
+      pauseAutoplayByUser();
+      selectPeriod(Number(year.dataset.period), { focus: true });
     });
     // Setas do teclado navegam entre os anos
     root.addEventListener("keydown", function (e) {
@@ -585,8 +689,10 @@
       else if (e.key === "ArrowRight" || e.key === "ArrowDown") idx = (idx + 1) % n;
       else idx = (idx - 1 + n) % n;
       e.preventDefault();
-      selectPeriod(idx, true);
+      pauseAutoplayByUser();
+      selectPeriod(idx, { focus: true });
     });
+    setupAutoplay();
   }
 
   /* ---------------------------------------------------------

@@ -554,6 +554,22 @@ html[lang="en"] .lang-toggle [data-lang="en"] {
   cursor: pointer;
   transition: background 0.35s, border-color 0.35s, box-shadow 0.35s, transform 0.3s var(--ease);
 }
+.period__year { position: relative; }
+/* Anel que mostra quanto falta para trocar de ano sozinho */
+.period__year::after {
+  content: "";
+  position: absolute;
+  inset: -7px;
+  border-radius: 50%;
+  background: conic-gradient(var(--red-light) calc(var(--t, 0) * 360deg), rgba(255, 255, 255, 0.08) 0);
+  -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
+  mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2.5px));
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+.timeline.is-autoplay .period.is-active .period__year::after { opacity: 1; }
+.period.is-active .period__year { transform: scale(1.05); }
 .period__year:hover {
   border-color: var(--red-light);
   box-shadow: 0 0 0 6px rgba(248, 113, 113, 0.12);
@@ -651,9 +667,23 @@ html[lang="en"] .lang-toggle [data-lang="en"] {
   gap: 16px;
   min-width: 0;
 }
-.detail {
-  animation: detail-in 0.5s var(--ease) both;
+/* Troca dos cards: saem para um lado e entram pelo outro, com desfoque leve */
+.details,
+.js .details.reveal.is-visible {
+  transition:
+    height 0.45s var(--ease),
+    opacity 0.8s var(--ease),
+    transform 0.8s var(--ease);
 }
+.detail {
+  animation: detail-in-fwd 0.6s var(--ease) both;
+}
+.details.is-back .detail { animation-name: detail-in-back; }
+.details.is-leaving .detail {
+  animation: detail-out-fwd 0.26s ease-in forwards !important;
+  animation-delay: 0s !important;
+}
+.details.is-leaving.is-back .detail { animation-name: detail-out-back !important; }
 /* Com duas atividades, cada card fica em coluna */
 .details--double .detail {
   flex-direction: column;
@@ -729,9 +759,19 @@ html[lang="en"] .lang-toggle [data-lang="en"] {
 }
 .detail__link:hover { text-decoration: underline; }
 
-@keyframes detail-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: none; }
+@keyframes detail-in-fwd {
+  from { opacity: 0; transform: translateX(40px) scale(0.98); filter: blur(6px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+@keyframes detail-in-back {
+  from { opacity: 0; transform: translateX(-40px) scale(0.98); filter: blur(6px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+@keyframes detail-out-fwd {
+  to { opacity: 0; transform: translateX(-40px) scale(0.98); filter: blur(6px); }
+}
+@keyframes detail-out-back {
+  to { opacity: 0; transform: translateX(40px) scale(0.98); filter: blur(6px); }
 }
 
 /* ---------- Projetos ---------- */
@@ -1334,7 +1374,9 @@ html[lang="en"] .lang-toggle [data-lang="en"] {
     transform: none;
     transition: opacity 0.8s ease var(--delay, 0s);
   }
-  .detail { animation-name: fade-in; }
-  .period__year:hover { transform: none; }
+  .detail,
+  .details.is-back .detail { animation-name: fade-in; }
+  .period__year:hover,
+  .period.is-active .period__year { transform: none; }
 }
 @keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
