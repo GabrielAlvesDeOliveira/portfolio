@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Gabriel Alves | Portfólio</title>
+  <meta name="description" content="Estudante de Engenharia de Computação na UTFPR. Conheça minha trajetória, meus projetos e o que eu sei fazer em tecnologia, dados e gestão de projetos.">
+  <meta name="theme-color" content="#0B0A12">
+
+  <!-- Prévia do link (WhatsApp, LinkedIn, Discord etc.) -->
+  <!-- Se o endereço do site mudar, troque-o nas tags og:url, og:image e twitter:image abaixo -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:site_name" content="Gabriel Alves">
+  <meta property="og:title" content="Gabriel Alves | Engenharia de Computação">
+  <meta property="og:description" content="Do técnico em Informática à Engenharia de Computação na UTFPR: conheça minha trajetória, meus projetos e o que eu sei fazer em tecnologia, dados e gestão de projetos.">
+  <meta property="og:url" content="https://gabrielalvesdeoliveira.github.io/portfolio/">
+  <meta property="og:image" content="https://gabrielalvesdeoliveira.github.io/portfolio/assets/og-preview.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Gabriel Alves | Engenharia de Computação">
+  <meta name="twitter:description" content="Do técnico em Informática à Engenharia de Computação na UTFPR: conheça minha trajetória, meus projetos e o que eu sei fazer em tecnologia, dados e gestão de projetos.">
+  <meta name="twitter:image" content="https://gabrielalvesdeoliveira.github.io/portfolio/assets/og-preview.jpg">
+
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a class="skip-link" href="#sobre" data-i18n="skip">Pular para o conteúdo</a>
+
+  <!-- Brilhos de fundo -->
+  <div class="glows" aria-hidden="true">
+    <span class="glow glow--1"></span>
+    <span class="glow glow--2"></span>
+    <span class="glow glow--3"></span>
+    <span class="glow glow--4"></span>
+    <span class="glow glow--5"></span>
+    <span class="glow glow--6"></span>
+  </div>
+
+  <!-- Barra de progresso da rolagem -->
+  <div class="progress" aria-hidden="true"><span class="progress__bar"></span></div>
+
+  <!-- Header -->
+  <header class="header">
+    <nav class="nav glass" aria-label="Principal" data-i18n-aria="navLabel">
+      <button class="nav__menu" type="button" aria-expanded="false" aria-controls="nav-links" data-i18n-aria="menu" aria-label="Abrir menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <ul class="nav__links" id="nav-links">
+        <li><a class="nav__link" href="#sobre" data-i18n="nav.sobre">Sobre mim</a></li>
+        <li><a class="nav__link" href="#trajetoria" data-i18n="nav.trajetoria">Trajetória</a></li>
+        <li><a class="nav__link" href="#projetos" data-i18n="nav.projetos">Projetos</a></li>
+        <li><a class="nav__link" href="#skills" data-i18n="nav.skills">Skills</a></li>
+        <li><a class="nav__link" href="#contato" data-i18n="nav.contato">Contato</a></li>
+      </ul>
+
+      <div class="nav__actions">
+        <span class="nav__divider" aria-hidden="true"></span>
+        <button class="lang-toggle" type="button" id="lang-toggle" aria-label="Switch to English">
+          <span data-lang="pt">PT</span><span data-lang="en">EN</span>
+        </button>
+        <a class="btn btn--primary" href="assets/Curriculo-GabrielAlves.pdf" download="Curriculo-GabrielAlves.pdf">
+          <span data-i18n="cv">Baixar CV</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>
+        </a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Paginação lateral -->
+  <nav class="pager" aria-label="Seções" data-i18n-aria="pagerLabel">
+    <a class="pager__dot" href="#sobre"><span class="pager__label" data-i18n="nav.sobre">Sobre mim</span></a>
+    <a class="pager__dot" href="#trajetoria"><span class="pager__label" data-i18n="nav.trajetoria">Trajetória</span></a>
+    <a class="pager__dot" href="#projetos"><span class="pager__label" data-i18n="nav.projetos">Projetos</span></a>
+    <a class="pager__dot" href="#skills"><span class="pager__label" data-i18n="nav.skills">Skills</span></a>
+    <a class="pager__dot" href="#contato"><span class="pager__label" data-i18n="nav.contato">Contato</span></a>
+  </nav>
+
+  <main>
+    <!-- Sobre mim -->
+    <section class="page about" id="sobre">
+      <div class="page__inner about__inner">
+        <div class="about__photo reveal">
+          <span class="about__ring" aria-hidden="true"></span>
+          <span class="about__dot" aria-hidden="true"></span>
+          <img src="assets/foto.jpg" width="400" height="400" alt="Foto de Gabriel Alves" data-i18n-alt="photoAlt">
+        </div>
+        <div class="about__text">
+          <p class="eyebrow reveal" data-i18n="nav.sobre">Sobre mim</p>
+          <h1 class="about__title reveal">
+            <span data-i18n="about.hello">Olá, eu sou</span><br>
+            <span class="gradient-text">Gabriel Alves</span>
+          </h1>
+          <p class="about__p reveal" data-i18n="about.p1">Estudante de Engenharia de Computação na UTFPR, campus Cornélio Procópio, com formatura prevista para 2027. Sou curioso por natureza e gosto de entender como as coisas funcionam e de aprender coisas novas.</p>
+          <p class="about__p reveal" data-i18n="about.p2">Comecei na tecnologia no técnico em Informática do IFSP, onde fiz estágio em desenvolvimento e liderei o backend do meu TCC. Desde então trabalho com desenvolvimento de sistemas, banco de dados e organização de projetos, sempre em contato com equipes e clientes.</p>
+          <p class="about__p reveal" data-i18n="about.p3">Busco oportunidades em tecnologia, dados e gestão de projetos, em um lugar onde eu possa continuar aprendendo na prática e contribuir com resultados reais.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Trajetória -->
+    <section class="page" id="trajetoria">
+      <div class="page__inner">
+        <header class="section-head reveal">
+          <p class="eyebrow" data-i18n="nav.trajetoria">Trajetória</p>
+          <h2 class="section-title" data-i18n="timeline.title">Minha trajetória</h2>
+          <p class="section-sub" data-i18n="timeline.sub">Clique em um ano para ver o que aconteceu nele. Quando duas coisas aconteceram no mesmo período, as duas aparecem juntas.</p>
+        </header>
+
+        <div class="timeline reveal" id="timeline" role="tablist" aria-label="Linha do tempo"></div>
+
+        <ul class="legend reveal">
+          <li><span class="type-dot type-dot--formacao"></span><span data-i18n="type.formacao">Formação</span></li>
+          <li><span class="type-dot type-dot--experiencia"></span><span data-i18n="type.experiencia">Experiência</span></li>
+          <li><span class="type-dot type-dot--extensao"></span><span data-i18n="type.extensao">Extensão</span></li>
+        </ul>
+
+        <div class="details reveal" id="timeline-detail" role="tabpanel" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Projetos -->
+    <section class="page" id="projetos">
+      <div class="page__inner">
+        <header class="section-head section-head--split reveal">
+          <div>
+            <p class="eyebrow" data-i18n="nav.projetos">Projetos</p>
+            <h2 class="section-title" data-i18n="projects.title">Meus projetos</h2>
+            <p class="section-sub" data-i18n="projects.sub">Atualizados automaticamente a partir do meu GitHub.</p>
+          </div>
+          <a class="pill glass" href="https://github.com/GabrielAlvesDeOliveira" target="_blank" rel="noopener">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            github.com/GabrielAlvesDeOliveira
+          </a>
+        </header>
+
+        <div class="filters reveal" id="filters" role="toolbar" aria-label="Filtrar por linguagem"></div>
+
+        <div class="repos" id="repos" aria-live="polite"></div>
+
+        <div class="repos__footer reveal">
+          <a class="btn btn--glass" href="https://github.com/GabrielAlvesDeOliveira?tab=repositories" target="_blank" rel="noopener" data-i18n="projects.all">Ver todos no GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="page" id="skills">
+      <div class="page__inner">
+        <header class="section-head section-head--split reveal">
+          <div>
+            <p class="eyebrow" data-i18n="nav.skills">Skills</p>
+            <h2 class="section-title" data-i18n="skills.title">Minhas árvores de habilidades</h2>
+            <p class="section-sub section-sub--narrow" data-i18n="skills.sub">Cada árvore reúne um tipo de habilidade e se ramifica até o que eu sei fazer, com o meu nível em cada uma.</p>
+          </div>
+          <ul class="levels">
+            <li><span class="level level--3" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="level.3">Avançado</span></li>
+            <li><span class="level level--2" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="level.2">Intermediário</span></li>
+            <li><span class="level level--1" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="level.1">Básico</span></li>
+          </ul>
+        </header>
+
+        <div class="trees" id="trees"></div>
+      </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="page contact" id="contato">
+      <div class="page__inner contact__inner">
+        <div class="contact__call reveal">
+          <p class="eyebrow" data-i18n="nav.contato">Contato</p>
+          <h2 class="contact__title">
+            <span data-i18n="contact.t1">Vamos</span><br>
+            <span class="gradient-text" data-i18n="contact.t2">conversar?</span>
+          </h2>
+          <p class="section-sub" data-i18n="contact.sub">Estou aberto a oportunidades, projetos e trocas de ideia. Me chama por qualquer um dos canais.</p>
+        </div>
+
+        <div class="channels">
+          <a class="channel glass reveal" href="mailto:alvesg2003@gmail.com">
+            <span class="channel__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+            </span>
+            <span class="channel__row">
+              <span class="channel__text">
+                <span class="channel__label">E-mail</span>
+                <span class="channel__value">alvesg2003@gmail.com</span>
+              </span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </span>
+          </a>
+          <a class="channel glass reveal" href="https://www.linkedin.com/in/gabs-alves" target="_blank" rel="noopener">
+            <span class="channel__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H3.56V20h3.38V8.5zM5.25 3a1.97 1.97 0 1 0 0 3.94 1.97 1.97 0 0 0 0-3.94zM20.44 13.2c0-3.1-1.65-4.94-4.32-4.94-1.6 0-2.62.86-3.05 1.66V8.5H9.7c.04.95 0 11.5 0 11.5h3.37v-6.42c0-.34.03-.68.13-.92.27-.68.89-1.38 1.93-1.38 1.36 0 1.9 1.04 1.9 2.56V20h3.38l.03-6.8z"/></svg>
+            </span>
+            <span class="channel__row">
+              <span class="channel__text">
+                <span class="channel__label">LinkedIn</span>
+                <span class="channel__value">in/gabs-alves</span>
+              </span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </span>
+          </a>
+          <a class="channel glass reveal" href="https://github.com/GabrielAlvesDeOliveira" target="_blank" rel="noopener">
+            <span class="channel__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+            </span>
+            <span class="channel__row">
+              <span class="channel__text">
+                <span class="channel__label">GitHub</span>
+                <span class="channel__value">github.com/GabrielAlvesDeOliveira</span>
+              </span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </span>
+          </a>
+          <a class="channel glass reveal" href="tel:+5513988120257">
+            <span class="channel__icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </span>
+            <span class="channel__row">
+              <span class="channel__text">
+                <span class="channel__label" data-i18n="contact.phone">Telefone</span>
+                <span class="channel__value">(13) 98812-0257</span>
+              </span>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Gabriel Alves</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
